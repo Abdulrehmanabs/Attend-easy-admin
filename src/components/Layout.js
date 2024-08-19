@@ -1,4 +1,5 @@
 "use client";
+import { Fragment } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
@@ -7,15 +8,15 @@ const Layout = ({ children }) => {
     return <div>qwertyu</div>;
   }
   return (
-    <section className="">
+    <Fragment>
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="w-full max-h-screen min-h-screen overflow-hidden">
+        <div className="w-full h-[calc(100dvh-76px)] overflow-auto">
           {children}
         </div>
       </div>
-    </section>
+    </Fragment>
   );
 };
 

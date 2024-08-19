@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import DashboardIcon from "@/svg's/DashboardIcon";
-import LeavesIcon from "@/svg's/LeavesIcon";
-import EventsIcon from "@/svg's/EventsIcon";
-import LogoutIcon from "@/svg's/LogoutIcon";
-import AnnouncementsIcon from "@/svg's/AnnouncementsIcon";
+import DashboardIcon from "@/svg's/Sidebar/DashboardIcon";
+import LeavesIcon from "@/svg's/Sidebar/LeavesIcon";
+import EventsIcon from "@/svg's/Sidebar/EventsIcon";
+import LogoutIcon from "@/svg's/Sidebar/LogoutIcon";
+import AnnouncementsIcon from "@/svg's/Sidebar/AnnouncementsIcon";
+import { AdminIcon } from "@/svg's/Sidebar/AdminIcon";
+import UsersIcon from "@/svg's/Sidebar/UsersIcon";
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
   return (
-    <aside className="bg-white text-SidebarNotSelected p-4 min-h-full">
+    <aside className="bg-white text-SidebarNotSelected p-4">
       <div
         onClick={() => router.push("/")}
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${
@@ -54,19 +56,37 @@ const Sidebar = () => {
         />
         {open && "Announcements"}
       </div>
-
       <div
-        onClick={() => {
-          // localStorage.removeItem("user");
-          window.location.reload();
-          router.push("/logout");
-        }}
+        onClick={() => router.push("/admin")}
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${
-          pathname == "/logout" &&
+          pathname == "/admin" &&
           "bg-SidebarSelectedBackGround text-SidebarSelected"
         } cursor-pointer hover:bg-SidebarSelectedBackGround`}
       >
-        <LogoutIcon color={pathname == "/logout" ? "#0171EA" : "#8D98AF"} />
+        <AdminIcon color={pathname == "/admin" ? "#0171EA" : "#8D98AF"} />
+        {open && "Admin"}
+      </div>
+      <div
+        onClick={() => router.push("/users")}
+        className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${
+          pathname == "/users" &&
+          "bg-SidebarSelectedBackGround text-SidebarSelected"
+        } cursor-pointer hover:bg-SidebarSelectedBackGround`}
+      >
+        <UsersIcon color={pathname == "/users" ? "#0171EA" : "#8D98AF"} />
+        {open && "Users"}
+      </div>
+
+      <div className="my-8 border-t border-[#F1F1F5]" />
+
+      <div
+        className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] hover:bg-SidebarSelectedBackGround cursor-pointer`}
+        onClick={() => {
+          // localStorage.removeItem("user");
+          window.location.reload();
+        }}
+      >
+        <LogoutIcon color={"#8D98AF"} />
         {open && "Logout"}
       </div>
     </aside>
