@@ -4,7 +4,7 @@
 
 @layer utilities {
   body {
-    background-color: aqua;
+    background-color: white;
   }
   .text-balance {
     text-wrap: balance;

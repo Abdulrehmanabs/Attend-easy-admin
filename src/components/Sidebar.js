@@ -7,12 +7,17 @@ import LogoutIcon from "@/svg's/Sidebar/LogoutIcon";
 import AnnouncementsIcon from "@/svg's/Sidebar/AnnouncementsIcon";
 import { AdminIcon } from "@/svg's/Sidebar/AdminIcon";
 import UsersIcon from "@/svg's/Sidebar/UsersIcon";
+import Modal from "./Modal";
+import LogoutConfirmation from "./LogoutModal";
+
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
   return (
-    <aside className="bg-white text-SidebarNotSelected p-4">
+    <aside className="bg-white min-w-[220px] text-SidebarNotSelected p-4 h-[calc(100dvh-76px)] overflow-auto">
       <div
         onClick={() => router.push("/")}
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${
@@ -81,14 +86,14 @@ const Sidebar = () => {
 
       <div
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] hover:bg-SidebarSelectedBackGround cursor-pointer`}
-        onClick={() => {
-          // localStorage.removeItem("user");
-          window.location.reload();
-        }}
+        onClick={() => setIsModalOpen(true)}
       >
         <LogoutIcon color={"#8D98AF"} />
         {open && "Logout"}
       </div>
+      <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+        <LogoutConfirmation closeModal={() => setIsModalOpen(false)} />
+      </Modal>
     </aside>
   );
 };
