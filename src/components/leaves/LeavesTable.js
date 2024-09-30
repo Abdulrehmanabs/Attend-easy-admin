@@ -28,8 +28,8 @@ const RequestedLeaves = () => {
 
       <DataTable
         value={leaveData}
-        paginator
-        rows={10}
+        // paginator
+        // rows={10}
         globalFilter={globalFilter}
         className="w-full"
       >

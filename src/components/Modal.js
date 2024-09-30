@@ -5,7 +5,7 @@ const Modal = ({ isModalOpen, closeModal, children }) => {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50">
         <div
-          className="absolute inset-0 bg-black opacity-50"
+          className="absolute inset-0 bg-black/50 opacity-50"
           onClick={() => closeModal()} // Close the modal when clicking on the overlay
         />
         <div className="bg-white m-4 relative p-6 rounded-lg shadow-lg z-10">

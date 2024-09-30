@@ -38,7 +38,7 @@ const Sidebar = () => {
         {open && "Leaves"}
       </div>
 
-      <div
+      {/* <div
         onClick={() => router.push("/events")}
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${
           pathname == "/events" &&
@@ -60,7 +60,8 @@ const Sidebar = () => {
           color={pathname == "/announcements" ? "#0171EA" : "#8D98AF"}
         />
         {open && "Announcements"}
-      </div>
+      </div> */}
+      
       <div
         onClick={() => router.push("/admin")}
         className={`flex gap-2 items-center mb-3 py-3 px-4 rounded-[8px] ${

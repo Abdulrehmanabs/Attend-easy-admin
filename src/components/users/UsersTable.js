@@ -5,13 +5,17 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
+import Modal from '../Modal';
 
 const UsersTable = () => {
     const [globalFilter, setGlobalFilter] = useState(null);
+    const [data, setData] = useState(users);
+    const [delUser, setDelUser] = useState(false);
+    const [selected, setSelected] = useState(null);
 
     const passwordTemplate = (rowData) => {
         return (
-            <div className="flex gap-2 justify-center">
+            <div className="flex gap-2 justify-start">
                 <span className='bg-gray-400 rounded-full w-3 h-3' />
                 <span className='bg-gray-400 rounded-full w-3 h-3' />
                 <span className='bg-gray-400 rounded-full w-3 h-3' />
@@ -23,15 +27,58 @@ const UsersTable = () => {
     };
     const actionTemplate = (rowData) => {
         return (
-            <div className="flex gap-2 justify-center">
-                <Button icon="pi pi-pencil" className="border py-1 text-blue-700" />
-                <Button onClick={() => users.filter(item => item.id !== rowData.id)} icon="pi pi-trash" className="border py-1 text-red-400" />
+            <div className="flex gap-2 justify-start">
+                <Button 
+                    onClick={() => {
+                        // setDelUser(true)
+                        setSelected(rowData)
+                    }} 
+                    icon="pi pi-pencil" className="border py-1 text-blue-700" 
+                />
+                <Button 
+                    onClick={() => {
+                        setDelUser(true)
+                        setSelected(rowData)
+                    }} 
+                    icon="pi pi-trash" className="border py-1 text-red-400" 
+                />
             </div>
         );
     };
 
     return (
         <div className="bg-white mx-auto p-4">
+            {/* del user  */}
+            <Modal  isModalOpen={delUser} closeModal={() => setDelUser(false)}>
+                <div className="p-2">
+                    <h2 className="text-4xl mb-4 font-semibold text-center text-gray-900">
+                        Delete User
+                    </h2>
+                    <p className="text-center text-gray-600">
+                        Are you sure you want to delete user?
+                    </p>
+                    <button
+                        onClick={() => {
+                            setData(data.filter(item => item.id !== selected?.id))
+                            setSelected(null)
+                            setDelUser(false)
+                        }} 
+                        className="w-full mt-4 mb-2 text-nowrap px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    >
+                        Delete, Anyway 
+                    </button>
+                    <button
+                        onClick={() => {
+                            setSelected(null)
+                            setDelUser(false)
+                        }}
+                        className="w-full px-4 py-2 text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-50"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </Modal>
+
             {/* Header Section */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-3xl font-bold">Users</h2>
@@ -51,9 +98,9 @@ const UsersTable = () => {
 
             {/* Table Section */}
             <DataTable 
-                value={users} 
-                paginator 
-                rows={10} 
+                value={data} 
+                // paginator 
+                // rows={10} 
                 globalFilter={globalFilter} 
                 className="w-full"
             >
