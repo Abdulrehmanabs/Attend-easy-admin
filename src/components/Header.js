@@ -1,7 +1,18 @@
 import Image from "next/image";
 import HeaderIcon from "@/svg's/Sidebar/HeaderIcon";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [email, setEmail] = useState("someone@gmail.com");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        const userData = JSON.parse(user);
+        setEmail(userData.email);
+      }
+    };
+  }, []);
   return (
     <header className="text-black flex justify-between items-center px-5 py-4 bg-white">
       <span className="text-[20px] font-semibold flex items-center gap-4">
@@ -22,7 +33,9 @@ const Header = () => {
           height={44}
           priority
         />
-        Khalid Hassan
+        <span className="capitalize">
+          @{email.split("@")[0]}
+        </span>          
       </div>
     </header>
   );

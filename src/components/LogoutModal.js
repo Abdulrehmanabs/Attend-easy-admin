@@ -1,8 +1,8 @@
 
 export default function LogoutConfirmation({ closeModal }) {
   return (
-    <div className="mx-auto">
-      <h2 className="text-4xl mb-4 font-semibold text-center text-gray-900">
+    <div className="mx-auto p-4">
+      <h2 className="text-2xl mb-4 font-semibold text-center text-gray-900">
         Logout
       </h2>
       <p className="text-center text-gray-600">
